@@ -45,17 +45,3 @@ struct TikTokCustomPicker_Previews: PreviewProvider {
         TikTokCustomPicker(selectedCategory: .constant(.following))
     }
 }
-
-enum Category: String, CaseIterable {
-    case following
-    case foryou
-    
-    var title: String {
-        switch self {
-        case .following:
-            return self.rawValue.capitalized
-        case .foryou:
-            return "For You"
-        }
-    }
-}

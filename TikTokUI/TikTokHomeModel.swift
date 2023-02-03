@@ -45,4 +45,62 @@ extension Video {
     ]
 }
 
+enum TabBarItems: String, CaseIterable {
+    case home
+    case new
+    case pluslogo
+    case inbox
+    case profile
+    
+    var title: String {
+        if self != .pluslogo {
+            return self.rawValue.capitalized
+        } else {
+            return ""
+        }
+    }
 
+    var icon: String {
+        switch self {
+        case .home:
+            return "house"
+        case .new:
+            return "person.2"
+        case .pluslogo:
+            return "tiktokplus"
+        case .inbox:
+            return "arrow.down.message"
+        case .profile:
+            return "person"
+        }
+    }
+    
+    var selectedIcon: String{
+        switch self {
+        case .home:
+            return "house.fill"
+        case .new:
+            return "person.2.fill"
+        case .pluslogo:
+            return "tiktokplus"
+        case .inbox:
+            return "arrow.down.message.fill"
+        case .profile:
+            return "person.fill"
+        }
+    }
+}
+
+enum Category: String, CaseIterable {
+    case following
+    case foryou
+    
+    var title: String {
+        switch self {
+        case .following:
+            return self.rawValue.capitalized
+        case .foryou:
+            return "For You"
+        }
+    }
+}

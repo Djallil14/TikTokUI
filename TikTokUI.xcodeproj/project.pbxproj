@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C53163C329881D19006C66D3 /* TikTokVideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53163C229881D19006C66D3 /* TikTokVideoModel.swift */; };
+		C53163C329881D19006C66D3 /* TikTokHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53163C229881D19006C66D3 /* TikTokHomeModel.swift */; };
 		C53163C7298836FF006C66D3 /* VideoPlayerOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53163C6298836FF006C66D3 /* VideoPlayerOverlayView.swift */; };
 		C53163C929884171006C66D3 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53163C829884171006C66D3 /* PlayerView.swift */; };
+		C55935D5298AC93500038FAE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55935D4298AC93500038FAE /* HomeViewModel.swift */; };
 		C59674D2298453D3001BC82A /* TikTokUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59674D1298453D3001BC82A /* TikTokUIApp.swift */; };
 		C59674D4298453D3001BC82A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59674D3298453D3001BC82A /* HomeView.swift */; };
 		C59674D6298453D4001BC82A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C59674D5298453D4001BC82A /* Assets.xcassets */; };
@@ -19,9 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C53163C229881D19006C66D3 /* TikTokVideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikTokVideoModel.swift; sourceTree = "<group>"; };
+		C53163C229881D19006C66D3 /* TikTokHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikTokHomeModel.swift; sourceTree = "<group>"; };
 		C53163C6298836FF006C66D3 /* VideoPlayerOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerOverlayView.swift; sourceTree = "<group>"; };
 		C53163C829884171006C66D3 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		C55935D4298AC93500038FAE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C59674CE298453D3001BC82A /* TikTokUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TikTokUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C59674D1298453D3001BC82A /* TikTokUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikTokUIApp.swift; sourceTree = "<group>"; };
 		C59674D3298453D3001BC82A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -64,11 +66,12 @@
 			children = (
 				C59674D1298453D3001BC82A /* TikTokUIApp.swift */,
 				C59674D3298453D3001BC82A /* HomeView.swift */,
+				C55935D4298AC93500038FAE /* HomeViewModel.swift */,
 				C53163C829884171006C66D3 /* PlayerView.swift */,
 				C53163C6298836FF006C66D3 /* VideoPlayerOverlayView.swift */,
 				C59674E0298453E7001BC82A /* TikTokCustomPicker.swift */,
 				C59674E22984566D001BC82A /* TikTokTabBarView.swift */,
-				C53163C229881D19006C66D3 /* TikTokVideoModel.swift */,
+				C53163C229881D19006C66D3 /* TikTokHomeModel.swift */,
 				C59674D5298453D4001BC82A /* Assets.xcassets */,
 				C59674D7298453D4001BC82A /* TikTokUI.entitlements */,
 				C59674D8298453D4001BC82A /* Preview Content */,
@@ -157,8 +160,9 @@
 				C59674D4298453D3001BC82A /* HomeView.swift in Sources */,
 				C59674D2298453D3001BC82A /* TikTokUIApp.swift in Sources */,
 				C53163C929884171006C66D3 /* PlayerView.swift in Sources */,
+				C55935D5298AC93500038FAE /* HomeViewModel.swift in Sources */,
 				C53163C7298836FF006C66D3 /* VideoPlayerOverlayView.swift in Sources */,
-				C53163C329881D19006C66D3 /* TikTokVideoModel.swift in Sources */,
+				C53163C329881D19006C66D3 /* TikTokHomeModel.swift in Sources */,
 				C59674E32984566D001BC82A /* TikTokTabBarView.swift in Sources */,
 				C59674E1298453E7001BC82A /* TikTokCustomPicker.swift in Sources */,
 			);

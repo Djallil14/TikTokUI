@@ -4,20 +4,22 @@ import AVFoundation
 
 class PlayerView: UIView {
 
-    // Override the property to make AVPlayerLayer the view's backing layer.
+    // make AVPlayerLayer the view's backing layer.
     override static var layerClass: AnyClass { AVPlayerLayer.self }
     
-    // The associated player object.
+    // Get the layer associated Player
     var player: AVPlayer? {
         get {
             playerLayer.player
         }
         set {
             playerLayer.player = newValue
+            playerLayer.videoGravity = .resizeAspectFill
             playerLayer.player?.play()
         }
     }
     
+    // Create a Queue player and associate it with the Looper, to player video as loop like tiktok
     var queuePlayer: AVQueuePlayer? {
         didSet {
             let item = AVPlayerItem(url: urlOfCurrentlyPlayingInPlayer(player: queuePlayer!))
@@ -26,6 +28,7 @@ class PlayerView: UIView {
         }
     }
     
+    // get the player url to configure our looper item
     func urlOfCurrentlyPlayingInPlayer(player : AVPlayer) -> URL {
         return ((player.currentItem?.asset) as? AVURLAsset)?.url ?? URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4")!
     }
@@ -39,12 +42,9 @@ struct CustomVideoPlayer: UIViewRepresentable {
 
     func makeUIView(context: Context) -> PlayerView {
         let view = PlayerView()
-
-        // Start the movie
         view.queuePlayer = player
         return view
     }
     
-    func updateUIView(_ uiView: PlayerView, context: Context) {
-    }
+    func updateUIView(_ uiView: PlayerView, context: Context) {}
 }

@@ -9,15 +9,10 @@ import SwiftUI
 import AVKit
 
 struct HomeView: View {
+    @StateObject var homeViewModel = HomeViewModel()
     @State var selectedTab: TabBarItems = .home
     @State var selectedCategory: Category = .foryou
-    @State var videos = Video.sample
-    @State var videoIndex = 0
     @State var videoHeight: CGFloat = .zero
-    @State var currentVideo: Video = Video.sample.first!
-    @State var heightPlayerOffset: CGFloat = 0
-    @State var playerDismissalOffset: CGFloat = 0
-    @State var currentPlayer: AVQueuePlayer?
     
     var body: some View {
         ZStack {
@@ -30,15 +25,15 @@ struct HomeView: View {
             Color.black.edgesIgnoringSafeArea(.top)
             VStack(spacing: 0) {
                 ZStack {
-                ForEach(videos) { video in
-                        videoPlayerFor(video: video, currentVideoPlayer: video == currentVideo)
+                    ForEach(homeViewModel.videos) { video in
+                        videoPlayerFor(video: video, currentVideoPlayer: video == homeViewModel.currentVideo)
                             .edgesIgnoringSafeArea(.top)
-                            .offset(y: video == currentVideo ? heightPlayerOffset : playerDismissalOffset)
-                            .opacity(video == currentVideo ? 1 : 0)
-                            .zIndex(video == currentVideo ? -1 : -99)
+                            .offset(y: homeViewModel.isCurrentVideo(video) ? homeViewModel.heightPlayerOffset : homeViewModel.playerDismissalOffset)
+                            .opacity(homeViewModel.isCurrentVideo(video) ? 1 : 0)
+                            .zIndex(homeViewModel.isCurrentVideo(video) ? -1 : -99)
                             .gesture(DragGesture(minimumDistance: 50, coordinateSpace: .global)
-                                .onChanged({handleDragGestureChange($0)})
-                                .onEnded({handleEndDragGesture($0)}))
+                                .onChanged({homeViewModel.handleDragGestureChange($0)})
+                                .onEnded({homeViewModel.handleEndDragGesture($0)}))
                     }
                 }.frame(height: videoHeight)
                 
@@ -49,70 +44,18 @@ struct HomeView: View {
         }
     }
     
-    private func handleEndDragGesture(_ value: DragGesture.Value) {
-        let horizontalAmount = value.translation.width
-        let verticalAmount = value.translation.height
-        
-        if abs(horizontalAmount) > abs(verticalAmount) {
-            return
-        } else {
-            if verticalAmount > 200 {
-                // Previous Video
-                guard videoIndex > 0 else {
-                    heightPlayerOffset = 0
-                    return
-                }
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    playerDismissalOffset = 1000
-                    heightPlayerOffset = 0
-                    videoIndex -= 1
-                    currentVideo = videos[videoIndex]
-                    currentPlayer?.play()
-                }
-            } else if verticalAmount < 200 {
-                guard videoIndex < videos.count - 1 else {
-                    heightPlayerOffset = 0
-                    return
-                }
-                // Next Video
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    playerDismissalOffset = -1000
-                    heightPlayerOffset = 0
-                    videoIndex += 1
-                    currentVideo = videos[videoIndex]
-                    currentPlayer?.play()
-                }
-            }
-        }
-    }
-    
-    private func handleDragGestureChange(_ value: DragGesture.Value) {
-        let horizontalAmount = value.translation.width
-        let verticalAmount = value.translation.height
-        
-        if abs(horizontalAmount) > abs(verticalAmount) {
-            // Horizontal Swipe
-            return
-        } else {
-            // Vertical Swipe
-            withAnimation(.easeInOut(duration: 0.5)) {
-                self.heightPlayerOffset = verticalAmount
-            }
-        }
-    }
-    
     @ViewBuilder
     private func videoPlayerFor(video: Video,  currentVideoPlayer: Bool) -> some View {
-        if video == currentVideo {
+        if video == homeViewModel.currentVideo {
             let player = AVQueuePlayer(url: video.url!)
             CustomVideoPlayer(player: player)
                 .overlay {
-                    VideoPlayerOverlayView(selectedCategory: $selectedCategory, video: $currentVideo)
+                    VideoPlayerOverlayView(selectedCategory: $selectedCategory, video: $homeViewModel.currentVideo)
                 }
                 .onAppear {
                     if currentVideoPlayer {
                         player.externalPlaybackVideoGravity = .resizeAspectFill
-                        currentPlayer = player
+                        homeViewModel.currentPlayer = player
                         player.isMuted = true
                         player.play()
                     } else {
@@ -120,7 +63,7 @@ struct HomeView: View {
                     }
                 }
                 .onDisappear {
-                    currentPlayer = nil
+                    homeViewModel.currentPlayer = nil
                     player.pause()
                     player.removeAllItems()
                 }
